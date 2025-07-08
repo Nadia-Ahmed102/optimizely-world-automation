@@ -1,31 +1,36 @@
-﻿import { test, expect } from '@playwright/test';
+﻿// tests/subnavigation.spec.ts
+import { test, expect } from '@playwright/test';
+import { readMenuItemsFromCSV } from '../Functions/readCSV';
+import path from 'path';
+console.log(readMenuItemsFromCSV);
 
-import { defineConfig } from '@playwright/test';
-
-export default defineConfig({
-    timeout: 300000, // 30 seconds for each test
-});
-
-test('Navigate through subnavigation menus on Optimizely World', async ({ page }) => {
-    test.setTimeout(30000000); // ⏱️ 30 seconds for this test
+test('Validate all subnavigation menus are visited', async ({ page }) => {
+    test.setTimeout(30000000);
+    const csvPath = path.resolve(__dirname, '../testData/subnavigationBarTexts.csv');
+    const expectedMenus = readMenuItemsFromCSV(csvPath);
 
     await page.goto('https://world.optimizely.com/');
-    await page.waitForSelector('nav');
 
     const menuItems = await page.locator('nav ul li > a').all();
+    const actualMenus: string[] = [];
 
     for (const menuItem of menuItems) {
         const text = await menuItem.textContent();
-        console.log(`Visiting menu: ${text?.trim()}`);
+        if (text) {
+            const cleanText = text.trim();
+            actualMenus.push(cleanText);
+            console.log(`Visiting menu: ${cleanText}`);
+            await page.waitForTimeout(250);
+        }
+    }
 
-        await menuItem.hover();
-        await page.waitForTimeout(1000); // wait for submenu
+    const missingMenus = expectedMenus.filter(expected => !actualMenus.includes(expected));
 
-        const submenuLinks = await menuItem.locator('xpath=..').locator('ul a');
-        const count = await submenuLinks.count();
-
-        
-        
+    if (missingMenus.length > 0) {
+        console.error('\n Missing navigation items:');
+        missingMenus.forEach(item => console.error(`- ${item}`));
+        throw new Error(`${missingMenus.length} expected item(s) not found.`);
+    } else {
+        console.log('\n✅ All expected navigation items were validated.');
     }
 });
-
