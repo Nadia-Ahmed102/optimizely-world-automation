@@ -19,7 +19,7 @@ test.describe('Carousel Block Tests', () => {
     expect(itemCount).toBeGreaterThan(1); 
   });
 
-  test.only('Verify all carousel links are valid', async ({page}) => {
+  test('Verify all carousel links are valid', async ({page}) => {
     await page.waitForLoadState('networkidle');
     const carouselItems = await page.locator(carouselLocator.carouselButton);
     const itemCount = await carouselItems.count();
@@ -36,4 +36,5 @@ test.describe('Carousel Block Tests', () => {
       }
     }
   });
+  
 });
