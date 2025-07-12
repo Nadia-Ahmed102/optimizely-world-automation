@@ -33,6 +33,7 @@ test.describe('Carousel Block Tests', () => {
         await expect(response?.status()).toBe(200); 
         await page.goBack(); 
         throw new Error(`Link for item ${i} is not a string: ${link}`);
+        console.log('.')
       }
     }
   });
