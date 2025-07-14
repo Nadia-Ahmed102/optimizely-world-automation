@@ -1,5 +1,6 @@
 import { test, expect } from './fixtures';
 import { ProductPage } from "./Pages/ProductPage";
+import { CsvReader } from "./utils/CsvReader";
 
 let productPage: ProductPage;
 
@@ -20,4 +21,15 @@ test('Verify carousel heading text on Product Page', async () => {
 
   const headingText = await productPage.getCarouselHeadingText(); // You must define this method in ProductPage class
   expect(headingText?.trim()).toBe('Unlock Digital Potential');
+});
+
+test('Verify all carousel headings match CSV data', async () => {
+  await productPage.clickOnProductNavMenu();
+
+  const actualHeadings = await productPage.getCarouselHeadings();
+  const expectedHeadings = CsvReader.readColumnFromCsv('ProductPageItems.csv');
+
+  for (const heading of actualHeadings) {
+    expect(expectedHeadings).toContain(heading);
+  }
 });
