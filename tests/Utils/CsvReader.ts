@@ -11,7 +11,7 @@ export class CsvReader {
    */
   static readColumnFromCsv(fileName: string, columnIndex: number = 0): string[] {
     const filePath = path.resolve(
-      'C:/Users/malaur/Documents/optimizely-world-automation/testData',
+      './testData',
       fileName
     );
 
