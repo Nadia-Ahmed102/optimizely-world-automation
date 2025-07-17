@@ -1,34 +1,26 @@
 import { test, expect } from '@playwright/test';
 
-test('Blog pagination and non-empty title validation (limited pages)', async ({ page }) => {
-  const maxPagesToCheck = 10; // 🔢 Adjust this number as needed
-  let currentPage = 1;
+test('Collect blog titles from page 11 to 20', async ({ page }) => {
+  const startPage = 11;
+  const endPage = 20;
+  const allTitles: string[] = [];
 
-  await page.goto('https://world.optimizely.com/blogs/');
+  for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
+    const url = `https://world.optimizely.com/blogs/?type=blog&pageNum=${pageNum}`;
+    console.log(`🔍 Visiting Page ${pageNum}: ${url}`);
+    await page.goto(url);
+    await page.waitForLoadState('domcontentloaded');
 
-  while (currentPage <= maxPagesToCheck) {
-    console.log(`🔍 Checking Page ${currentPage}`);
+    const titles = await page.locator('.blog-list-title').allTextContents();
+    titles.forEach((title, i) => {
+      console.log(`  ${i + 1}: ${title}`);
+      expect(title.length).toBeGreaterThan(0);
+    });
 
-    const blogTitles = page.locator('.blog-list-title');
-    const titles = await blogTitles.allTextContents();
-
-   // ✅ Ensure no blog title is empty
-titles.forEach((title, index) => {
-  console.log(`  ${index + 1}: ${title}`);
-  expect(title.length).toBeGreaterThan(0);
-});
-
-    // 👉 Try to go to next page if it exists
-    const nextBtn = page.locator('a.nextButton');
-    if (await nextBtn.isVisible()) {
-      await nextBtn.click();
-      await page.waitForLoadState('domcontentloaded');
-      currentPage++;
-    } else {
-      console.log('✅ No more pages found. Exiting.');
-      break;
-    }
+    allTitles.push(...titles);
   }
 
-  console.log(`✅ Done checking ${Math.min(currentPage, maxPagesToCheck)} pages.`);
+  console.log(`\n✅ Finished collecting from page ${startPage} to ${endPage}`);
+  console.log('\n📋 All Collected Blog Titles:');
+  allTitles.forEach((title, i) => console.log(`${i + 1}. ${title}`));
 });
