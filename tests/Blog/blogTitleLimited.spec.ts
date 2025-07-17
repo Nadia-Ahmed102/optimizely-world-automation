@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test('Collect blog titles from page 11 to 20', async ({ page }) => {
-  const startPage = 11;
-  const endPage = 20;
+test('Collect blog titles from Limited page num', async ({ page }) => {
+  const startPage = 21;
+  const endPage = 22;
   const allTitles: string[] = [];
 
   for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
