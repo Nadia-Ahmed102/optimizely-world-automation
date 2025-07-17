@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
   await productPage.navigateToOptimizelyWorldHomepage();
 });
 
-test('Check if the user can navigate to the product page', async () => {
+test('Verify if the user can navigate to the product page', async () => {
   await productPage.clickOnProductNavMenu();
 
   // Basic smoke assertion
@@ -31,5 +31,14 @@ test('Verify all carousel headings match CSV data', async () => {
 
   for (const heading of actualHeadings) {
     expect(expectedHeadings).toContain(heading);
+  }
+});
+test('Verify accordion titles match expected values from CSV', async () => {
+
+  const actualTitles = await productPage.getAccordionTitles();
+  const expectedTitles = CsvReader.readColumnFromCsv('AccordionHeadingItems.csv');
+
+  for (const title of actualTitles) {
+    expect(expectedTitles).toContain(title);
   }
 });
