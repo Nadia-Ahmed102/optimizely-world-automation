@@ -1,6 +1,6 @@
 import { test as base, expect, Page } from '@playwright/test';
-import { ProductPage } from "./Pages/ProductPage";
-import { ProductMigrationPage } from './Pages/ProductMigrationPage';
+import { ProductPage } from "../Pages/ProductPage";
+import { ProductMigrationPage } from '../Pages/ProductMigrationPage';
 
 
 // Extend the base test to include ProductPage in the test context

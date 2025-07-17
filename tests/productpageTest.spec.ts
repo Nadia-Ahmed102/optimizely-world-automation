@@ -1,5 +1,5 @@
 import { test, expect } from './fixtures';
-import { ProductPage } from "./Pages/ProductPage";
+import { ProductPage } from "../Pages/ProductPage";
 import { CsvReader } from "./utils/CsvReader";
 
 let productPage: ProductPage;
