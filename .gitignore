@@ -141,4 +141,3 @@ vite.config.ts.timestamp-*
 # Ignore test results
 test-results/
 test-results/.last-run.json
-test-results/.last-run.json
