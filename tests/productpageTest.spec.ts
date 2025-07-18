@@ -1,6 +1,6 @@
 import { test, expect } from './fixtures';
 import { ProductPage } from "../Pages/ProductPage";
-import { CsvReader } from "./utils/CsvReader";
+import { CsvReader } from "../utils/CsvReader";
 
 let productPage: ProductPage;
 
@@ -34,10 +34,12 @@ test('Verify all carousel headings match CSV data', async () => {
   }
 });
 test('Verify accordion titles match expected values from CSV', async () => {
+  await productPage.clickOnProductNavMenu();
 
   const actualTitles = await productPage.getAccordionTitles();
+  console.log("actualtitle", actualTitles);
   const expectedTitles = CsvReader.readColumnFromCsv('AccordionHeadingItems.csv');
-
+  console.log("expected",expectedTitles);
   for (const title of actualTitles) {
     expect(expectedTitles).toContain(title);
   }

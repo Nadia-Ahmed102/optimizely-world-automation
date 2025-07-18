@@ -49,6 +49,7 @@ readonly accordionHeadings: Locator;
 async getAccordionTitles(): Promise<string[]> {
   const count = await this.accordionHeadings.count();
   const titles: string[] = [];
+  console.log("Count", count);
 
   for (let i = 0; i < count; i++) {
     const heading = this.accordionHeadings.nth(i);
