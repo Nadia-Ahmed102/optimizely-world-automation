@@ -44,4 +44,11 @@ export class ProductMigrationPage extends basePage {
     await this.page.getByRole('link', { name: 'Product migration' }).waitFor({ state: 'visible' });
     await this.page.getByRole('link', { name: 'Product migration' }).click();
   }
-}
+  async getAllHeadings(): Promise<string[]> {
+    await this.carouselHeading.waitFor({ state: 'visible' });
+    const headings = await this.page.locator(':is(h1, h2)').allTextContents();
+    const trimmedHeadings = headings.map(heading => heading.trim()).filter(heading => heading.length > 0); //trim spaces and remove empty strings
+    //return headings.map(heading => heading.trim());
+    return trimmedHeadings;
+  }
+}     

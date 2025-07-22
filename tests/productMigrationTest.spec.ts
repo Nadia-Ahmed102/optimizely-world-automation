@@ -1,6 +1,6 @@
 import { test, expect } from './fixtures';
 import { ProductMigrationPage } from "../Pages/ProductMigrationPage";
-import { CsvReader } from './utils/CsvReader'; // Adjust the path as needed
+import { CsvReader } from '../Utils/CsvReader'; // Adjust the path as needed
 
 let productMigrationPage: ProductMigrationPage;
 
@@ -25,13 +25,18 @@ test('Verify carousel heading text on Product Page', async () => {
 
 test('Verify all carousel headings match CSV data', async () => {
   await productMigrationPage.navToProductMigrationPage();
-  const actualHeadings = await productMigrationPage.getCarouselHeadingText();
+  const actualHeadings = await productMigrationPage.getAllHeadings();
   const expectedHeadings = CsvReader.readColumnFromCsv('ProductMigrationPageItems.csv');
 
+
+  
     for (const heading of actualHeadings) {
+      console.log(`Heading: ${heading}`);
       expect(expectedHeadings).toContain(heading);
      }
+   
   });
+
 
   test('Verify content and behavior of accordion items', async () => {
     await productMigrationPage.navToProductMigrationPage();
