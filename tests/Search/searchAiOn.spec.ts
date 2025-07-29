@@ -33,7 +33,7 @@ test('test', async ({ page }) => {
     const titles = await results.allTextContents();
 
     console.log('Search Result Titles:'); // to show first few results
-    titles.forEach((title: any, index: 4) => {
+    titles.forEach((title: any, index: 2) => {
 
         console.log(`${index + 1}: ${title}`);
     });
