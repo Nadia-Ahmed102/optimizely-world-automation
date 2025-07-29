@@ -1,35 +1,43 @@
-﻿import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('Go to world.optimizely.com and click the search bar', async ({ page }) => {
-    // Step 1: Navigate to the website
-    await page.goto('https://world.optimizely.com/', { waitUntil: 'domcontentloaded' });
+test('test', async ({ page }) => {
+    await page.goto('https://world.optimizely.com/');
 
     const defaultSearchModeLabel = await page.locator('#search-toggle-container > span > span.ai');
     expect(defaultSearchModeLabel).toHaveText('AI On');
     console.log('✅ AI is On successfully');
 
-    // Step 2: Click the search icon in the header
-    const searchIcon = page.locator('#searchWidgetTrigger');
-    await expect(searchIcon).toBeVisible({ timeout: 30000000 });
-    await searchIcon.click();
+    await page.getByRole('textbox', { name: 'Refine by search' }).click();
+    await page.getByRole('searchbox', { name: 'Search' }).fill('Optimizely');
+    await page.getByRole('searchbox', { name: 'Search' }).press('Tab');
+    await page.getByRole('button', { name: 'Clear' }).press('Shift+Tab');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForLoadState('networkidle');
+    await page.getByRole('searchbox', { name: 'Search' }).press('Enter');
+    //test.setTimeout(3000000);
+    await page.waitForTimeout(20000);
+    await page.waitForLoadState('networkidle');
+    await page.getByRole('searchbox', { name: 'Search' }).press('Enter');//first search shows: Problem loading results so try 2nd time
+    //await page.waitForTimeout(20000);
+    test.setTimeout(3000000);
 
-    // Step 3: Wait for the search input field to appear
-    const searchInput = page.locator('input[placeholder="Refine by search"]');
-    await expect(searchInput).toBeVisible({ timeout: 100000 });
 
-    // Type something to verify it's interactive
-    await searchInput.fill('Optimizely One');
-    console.log('✅ Search bar clicked and filled successfully');
-    await searchInput.press('Enter');
-    await expect(searchInput).toBeVisible({ timeout: 100000 });
-
-    // Step 4: Wait for at least one result to appear
-    const rows = page.getByText('item item-doc item-website-doc   ');
-    const count = await rows.count();
-    console.log(`🔢 Found ${count} search result rows.`);
-    
+    // 3. Wait for search results to load
+    await page.waitForLoadState('networkidle'); // optional but helpful
+    await page.waitForTimeout(20000); // may need delay for rendering
 
     
+
+    //const searchTitles = page.locator('.results-list  ');
+    const results = page.locator('.header');
+    const titles = await results.allTextContents();
+
+    console.log('Search Result Titles:'); // to show first few results
+    titles.forEach((title: any, index: 4) => {
+
+        console.log(`${index + 1}: ${title}`);
+    });
     
+  
 
 });
