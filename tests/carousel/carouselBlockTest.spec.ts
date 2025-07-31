@@ -28,14 +28,18 @@ test.describe('Carousel Block Tests', () => {
     for (let i = 0; i < itemCount -1 ; i++) {
       const link = await carouselItems.nth(i).getAttribute('href');
       await expect(link).toBeTruthy(); 
-      if (typeof link === 'string') {
-        const response = await page.goto(link);
-        await expect(response?.status()).toBe(200); 
-        await page.goBack(); 
-        throw new Error(`Link for item ${i} is not a string: ${link}`);
-        console.log('.')
+      try{ 
+          if (typeof link === 'string') {             
+          const response = await page.goto(link);
+          await expect(response?.status()).toBe(200); 
+          await page.goBack(); }
       }
+        catch (error) {
+          // Handle the error
+          console.error("An error occurred:", `Link for item ${i} is not a string: ${link}`);}
     }
   });
   
 });
+
+

@@ -16,27 +16,23 @@ test('Check if the user can navigate to the product > migration page', async () 
   await expect(productMigrationPage.page).toHaveURL(/\/product-migration\/?$/);
 });
 
-test('Verify carousel heading text on Product Page', async () => {
+test('Verify carousel heading text on Product-Migration Page', async () => {
   await productMigrationPage.navToProductMigrationPage();
 
   const headingText = await productMigrationPage.getCarouselHeadingText(); // You must define this method in ProductPage class
   expect(headingText?.trim()).toBe('Product Migration');
 });
 
-test('Verify all carousel headings match CSV data', async () => {
+test('Verify all headings match CSV data', async () => {
   await productMigrationPage.navToProductMigrationPage();
   const actualHeadings = await productMigrationPage.getAllHeadings();
   const expectedHeadings = CsvReader.readColumnFromCsv('ProductMigrationPageItems.csv');
-
-
   
     for (const heading of actualHeadings) {
       console.log(`Heading: ${heading}`);
       expect(expectedHeadings).toContain(heading);
      }
-   
   });
-
 
   test('Verify content and behavior of accordion items', async () => {
     await productMigrationPage.navToProductMigrationPage();
