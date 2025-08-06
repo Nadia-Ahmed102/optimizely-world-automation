@@ -33,4 +33,22 @@ export class basePage
         await field.waitFor({ state: 'visible' });
         await field.fill(inputValue);
     }
+
+    async listenForConsoleEvents(): Promise<void> {
+        this.basePage.on('console', (msg) => {
+            console.log(`Console message: ${msg.type()} - ${msg.text()}`);
+        });
+    }
+    async listenForPageErrors(): Promise<void> {
+        this.basePage.on('pageerror', (error) => {
+            console.error(`Page error: ${error.message}`);
+        });
+    }
+    async listenForResponseErrors(): Promise<void> {
+        this.basePage.on('response', (response) => {
+            if (!response.ok()) {
+                console.error(`Response error: ${response.status()} - ${response.url()}`);
+            }
+        });
+    }
 }
