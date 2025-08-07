@@ -44,3 +44,18 @@ test('Verify accordion titles match expected values from CSV', async () => {
     expect(expectedTitles).toContain(title);
   }
 });
+
+test('Accordion blocks expand, show content, and collapse again', async () => {
+  await productPage.clickOnProductNavMenu(); // assuming already exists
+
+  const accordionCount = await (await productPage.getAccordionItems()).count();
+
+  for (let i = 0; i < accordionCount; i++) {
+    const accordionData = await productPage.expandAccordionAndValidate(i);
+
+    console.log(`Verifying: ${accordionData.title}`);
+    expect(accordionData.isExpanded).toBeTruthy();
+    expect(accordionData.content.length).toBeGreaterThan(0);
+    expect(accordionData.isCollapsed).toBeTruthy();
+  }
+});
