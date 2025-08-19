@@ -23,7 +23,9 @@ test("Test accordion text changes on click", async ({ page }) => {
 
 test("Click first faq", async ({ page }) => {
   //TODO: move this locator to pom class, add some assertions about the visibility of the faq text
+  // This should be implemented today
   await page
     .locator("#heading-accordion-277086-1 > div > div.symbol > div.plusminus")
     .click();
+  await expect(page.locator("#accordion-277086-1 > div > div > p")).toBeVisible();
 });
