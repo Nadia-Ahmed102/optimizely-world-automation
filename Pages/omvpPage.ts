@@ -2,6 +2,7 @@ import { Page, Locator } from "@playwright/test";
 import { basePage } from "./basePage";
 
 export class omvpPage extends basePage {
+  // Accordion
   readonly page: Page;
   readonly firstAccordionFirstText: Locator;
   readonly firstAccordionSecondText: Locator;
@@ -13,7 +14,7 @@ export class omvpPage extends basePage {
   readonly secondAccordionLeftArrow: Locator;
   static firstAccordionFirstText: any;
 
-  // New FAQ locators
+  // FAQ locators
   readonly firstFAQ: Locator;
   readonly firstFAQToggle: Locator;
 
@@ -41,9 +42,9 @@ export class omvpPage extends basePage {
       "section[id='carousel-277091'] span[class='carousel-control-prev-icon']");
 
     // FAQ locators
-    this.firstFAQ = page.locator('//*[@id="accordion-277086"]/div[2]');
+    this.firstFAQ = page.locator("#heading-accordion-277086-1 > div > div.symbol > div.plusminus");
     this.firstFAQToggle = page.locator(
-      "#heading-accordion-277086-1 > div > div.symbol > div.plusminus"
+      '//*[@id="accordion-277086"]/div[2]'
     );
   }
 }
