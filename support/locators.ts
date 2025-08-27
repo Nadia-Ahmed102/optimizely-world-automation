@@ -39,3 +39,24 @@ export const loginPageVariables = {
   worldAccPasswordValue: 'Test123!',
 
 }
+
+export const cmsOverviewPageVariables = {
+  homepageProductsMenu: 'a[href="/products/"]',
+  homepageProductCmsSubMenu: 'ul[class="dropdown-menu second"] > li > a[href="/products/cms/overview/"]',
+  promoSubtitle: '.promo .contentContainer .content p:nth-of-type(2)',
+  promoImg: '.promo .imageContainer .image .lazy',
+  colorBlockTitle: '.colourBlockContainer .title .bold',
+  colorItemText: '.colourBlocks > .colourBlock:nth-of-type(3) p:nth-of-type(2) > span',
+  bloglistingTitle: '.blogListing .title .bold',
+  blogTitle: '.blogItem .content .blurb .title',
+  carouselTitle: '.carousel-content > h2 >span',
+  carouselImg: '.carousel-background .lazy',
+  socialMediaColumnTitle: '.columnContainer .title .bold',
+  socialMediaLinkedinColumnTitle: '.contentContainer .content .bold',
+  forumpostBlockSubtitle: '.latestForumPosts > p',
+  forumpostTitle: 'a[href*="proper-way-to-backtrack-published-changes-done-in-bulk" i]',
+  columnBlockTitle: '.columnContainer .title .bold',
+  columnItemTitle: '.contentContainer .content .bold',
+  columnItemImg: '.row .col .block .promo .imageContainer .image .lazy',
+
+}
