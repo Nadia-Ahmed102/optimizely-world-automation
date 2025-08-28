@@ -68,3 +68,21 @@ test("Check expando behavior on Web Exp Features Page - Getting Started Section"
   await expect(productWebExpPage.expando1AccordionContent).not.toBeVisible();
   await expect(productWebExpPage.expando2AccordionContent).not.toBeVisible();
 });
+
+test("Check that Learn more about Optimizely's Web Experimentation tab container defaults to Documentation and the other 2 tabs work", async () => {
+  await productWebExpPage.navigateToWebExpFeaturesPage();
+  /* use these as locators for the tab parents:
+  #tabContainer-5250605914521479002 > ul > li:nth-child(1)
+  #tabContainer-5250605914521479002 > ul > li:nth-child(2)
+  #tabContainer-5250605914521479002 > ul > li:nth-child(3)
+  */
+  await expect(productWebExpPage.tabContainerItems.first()).toBeVisible();
+  await expect(productWebExpPage.tabContainerItems.first()).toHaveClass(
+    /tabNavItem ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active/
+  );
+  //TODO: add the rest of the test logic to ensure that clicking thru the tab items changes the content below and that the tab labels change their classes to show which is active
+});
+
+test("Check that tab container has slider/arrow controls that scrolls the tab content", async () => {
+  await productWebExpPage.navigateToWebExpFeaturesPage();
+});

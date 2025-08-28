@@ -16,6 +16,9 @@ export class ProductWebExpPage extends basePage {
   readonly expando2Parent: Locator;
   readonly expando1AccordionContent: Locator;
   readonly expando2AccordionContent: Locator;
+  readonly tabContainerItems: Locator;
+  readonly tabContainerBlogs: Locator;
+  readonly tabContainerOtherResources: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -44,6 +47,7 @@ export class ProductWebExpPage extends basePage {
     this.expando2AccordionContent = page.locator(
       "#accordion-278437-2 > div > ul"
     );
+    this.tabContainerItems = page.locator('li[class*="tabNavItem"]');
   }
 
   async navigateToWebExpOverviewPage() {
