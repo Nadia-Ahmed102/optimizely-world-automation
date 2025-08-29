@@ -22,8 +22,12 @@ test("Test accordion text changes on click", async ({ page }) => {
 });
 
 test("Click first faq", async ({ page }) => {
-  //TODO: move this locator to pom class, add some assertions about the visibility of the faq text
-  await page
-    .locator("#heading-accordion-277086-1 > div > div.symbol > div.plusminus")
-    .click();
+  const omvp = new omvpPage(page);
+  await expect(omvp.firstFAQ).toBeVisible();
+  await expect(omvp.firstFAQ).not.toHaveClass(/show/);
+  await omvp.firstFAQToggle.click();
+  await expect(omvp.firstFAQ).toHaveClass(/show/);
+  await expect(omvp.firstFAQ).toContainText(
+    "Once an applicant applies, they can expect to be notified when their application has been received. Once the application period closes, the selection process begins. Optimizely chooses OMVPs based upon the application requirements and the OMVP will be notified of acceptance or denial of entry into the program, as well as their rank/tier. The process can take about a month to complete."
+  );
 });
