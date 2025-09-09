@@ -7,7 +7,7 @@ export default defineConfig({
   retries: 1,                    // Retry failed tests once
   use: {
     baseURL: 'https://world.optimizely.com/',  // Site under test
-    headless: true,              // Run browsers in headless mode
+    headless: false,              // Run browsers in headless mode
     screenshot: 'only-on-failure', // Take screenshots only if tests fail
     video: 'retain-on-failure',    // Save videos for failed tests
     trace: 'retain-on-failure',    // Capture trace for failed tests (helps with debugging)
