@@ -1,6 +1,6 @@
 // ProductWebExpPage.ts
 import { Page, Locator } from "@playwright/test";
-import { basePage } from "./basePage";
+import { basePage } from "./BasePage";
 
 export class ProductWebExpPage extends basePage {
   readonly page: Page;

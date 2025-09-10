@@ -1,6 +1,6 @@
 // ProductMigrationPage.ts
 import { Page, Locator } from "@playwright/test";
-import { basePage } from "./basePage";
+import { basePage } from "./BasePage";
 
 export class ProductMigrationPage extends basePage {
   readonly page: Page;
