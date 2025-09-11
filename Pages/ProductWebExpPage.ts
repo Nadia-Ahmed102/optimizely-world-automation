@@ -5,7 +5,7 @@ import { basePage } from "./BasePage";
 export class ProductWebExpPage extends basePage {
   readonly page: Page;
   readonly promoBlockPageTitle: Locator;
-  readonly carouselH1Title: Locator;
+  readonly carouselHeading: Locator;
   readonly expando1: Locator;
   readonly expando2: Locator;
   readonly expando1Plusminus: Locator;
@@ -24,7 +24,7 @@ export class ProductWebExpPage extends basePage {
     super(page);
     this.page = page;
     this.promoBlockPageTitle = page.locator("p.pageTitle");
-    this.carouselH1Title = page.locator("div.carousel-content > h1");
+    this.carouselHeading = page.locator("div.carousel-content > h1");
     this.expando1 = page.locator("#heading-accordion-278437-1 > div");
     this.expando2 = page.locator("#heading-accordion-278437-2 > div");
     this.expando1Plusminus = page.locator(

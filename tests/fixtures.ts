@@ -1,9 +1,8 @@
-import { test as base, expect, Page } from '@playwright/test';
+import { test as base, expect, Page } from "@playwright/test";
 import { ProductPage } from "../Pages/ProductPage";
-import { ProductMigrationPage } from '../Pages/ProductMigrationPage';
-import { LoginPage } from '../Pages/LogIn';
-import { CmsOverviewPage } from '../Pages/cmsOverview';
-
+import { ProductMigrationPage } from "../Pages/ProductMigrationPage";
+import { CmsOverviewPage } from "../Pages/CmsOverviewPage";
+import { LoginPage } from "../Pages/LoginPage";
 
 // Extend the base test to include ProductPage in the test context
 type TestFixtures = {
@@ -17,7 +16,6 @@ export const test = base.extend<TestFixtures>({
   productPage: async ({ page }, use) => {
     const productPage = new ProductPage(page);
     await use(productPage);
-
   },
 
   productMigrationPage: async ({ page }, use) => {
@@ -34,8 +32,6 @@ export const test = base.extend<TestFixtures>({
     const cmsOverviewPage = new CmsOverviewPage(page);
     await use(cmsOverviewPage);
   },
-
 });
-
 
 export { expect };

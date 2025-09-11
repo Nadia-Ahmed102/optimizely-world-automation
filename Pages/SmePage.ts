@@ -12,7 +12,7 @@ export class SmePage extends basePage {
   readonly qualificationsHeading: Locator;
   readonly benefitsHeading: Locator;
   readonly searchInput: Locator;
-  readonly navLinks: Locator;
+  readonly navigationLinks: Locator;
   readonly memberImages: Locator;
 
   constructor(page: Page) {
@@ -36,7 +36,7 @@ export class SmePage extends basePage {
     });
     this.benefitsHeading = page.locator("h5.bold", { hasText: "Benefits" });
     this.searchInput = page.locator("input#inlineFormInputGroup"); //TODO fix this
-    this.navLinks = page.locator("nav a, .nav a, .navbar a, .menu a");
+    this.navigationLinks = page.locator("nav a, .nav a, .navbar a, .menu a");
     this.memberImages = page.locator(
       'img[alt], img[alt="Alex"], img[alt="Amol"], img[alt="Andreas"]'
     );
@@ -62,7 +62,7 @@ export class SmePage extends basePage {
   }
 
   async getNavLinksText(): Promise<string[]> {
-    const links = await this.navLinks.allTextContents();
+    const links = await this.navigationLinks.allTextContents();
     return links.map((link) => link.trim()).filter((link) => link.length > 0);
   }
 

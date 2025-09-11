@@ -24,8 +24,8 @@ test("Check if the user can navigate to the product > web-experimentation > feat
   await productWebExpPage.navigateToWebExpFeaturesPage();
   // Basic smoke assertion
   await expect(productWebExpPage.page).toHaveURL(/\/features\/?$/);
-  await expect(productWebExpPage.carouselH1Title).toBeVisible();
-  await expect(productWebExpPage.carouselH1Title).toHaveText(
+  await expect(productWebExpPage.carouselHeading).toBeVisible();
+  await expect(productWebExpPage.carouselHeading).toHaveText(
     "Web Experimentation"
   );
 });
