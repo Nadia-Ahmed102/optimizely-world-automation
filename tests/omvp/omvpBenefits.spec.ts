@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { omvpPage } from "../../Pages/omvpPage";
+import { OmvpBenefitsPage } from "../../Pages/omvpBenefits";
 
 test.beforeEach(async ({ page }) => {
-  // Navigate to the OMVP Benefits page before each test
-  await page.goto("https://world.optimizely.com/community/omvp/benefits/");
+  const omvpBenefits = new OmvpBenefitsPage(page);
+  await omvpBenefits.goto();
 });
 
 test("OMVP benefits page should have expected title", async ({ page }) => {
@@ -11,68 +11,52 @@ test("OMVP benefits page should have expected title", async ({ page }) => {
 });
 
 test("OMVP Benefits page breadcrumbs should be correct", async ({ page }) => {
-  // Home breadcrumb
-  const homeBreadcrumb = page.locator('#breadcrumbs > span:nth-child(1) > a:nth-child(1)');
-  await expect(homeBreadcrumb).toBeVisible();
-  await expect(homeBreadcrumb).toHaveText('Home');
-  await expect(homeBreadcrumb).toHaveAttribute('href', '/');
+  const omvpBenefits = new OmvpBenefitsPage(page);
 
-  // Community breadcrumb
-  const communityBreadcrumb = page.locator('#breadcrumbs > a:nth-child(2)');
-  await expect(communityBreadcrumb).toBeVisible();
-  await expect(communityBreadcrumb).toHaveText('Community');
-  await expect(communityBreadcrumb).toHaveAttribute('href', '/community/');
+  await expect(omvpBenefits.homeBreadcrumb).toBeVisible();
+  await expect(omvpBenefits.homeBreadcrumb).toHaveText("Home");
+  await expect(omvpBenefits.homeBreadcrumb).toHaveAttribute("href", "/");
 
-  // OMVP breadcrumb
-  const omvpBreadcrumb = page.locator('#breadcrumbs > a:nth-child(3)');
-  await expect(omvpBreadcrumb).toBeVisible();
-  await expect(omvpBreadcrumb).toHaveText('OMVP');
-  await expect(omvpBreadcrumb).toHaveAttribute('href', '/community/omvp/');
+  await expect(omvpBenefits.communityBreadcrumb).toBeVisible();
+  await expect(omvpBenefits.communityBreadcrumb).toHaveText("Community");
+  await expect(omvpBenefits.communityBreadcrumb).toHaveAttribute("href", "/community/");
+
+  await expect(omvpBenefits.omvpBreadcrumb).toBeVisible();
+  await expect(omvpBenefits.omvpBreadcrumb).toHaveText("OMVP");
+  await expect(omvpBenefits.omvpBreadcrumb).toHaveAttribute("href", "/community/omvp/");
 });
 
 test("OMVP Benefits page header should contain expected texts", async ({ page }) => {
-  const header = page.locator('.carousel-content');
+  const omvpBenefits = new OmvpBenefitsPage(page);
 
-  // Verify the header is visible
-  await expect(header).toBeVisible();
-
-  // Verify it contains "OMVP Benefits"
-  await expect(header).toContainText('OMVP Benefits');
-
-  // Verify it contains "Perks and Privileges of being an OMVP"
-  await expect(header).toContainText('Perks and Privileges of being an OMVP');
+  await expect(omvpBenefits.header).toBeVisible();
+  await expect(omvpBenefits.header).toContainText("OMVP Benefits");
+  await expect(omvpBenefits.header).toContainText("Perks and Privileges of being an OMVP");
 });
 
 test("OMVP Benefits page 'Swag' accordion should expand and show correct text", async ({ page }) => {
-  // Locate the "Swag" accordion header
-  const swagAccordion = page.locator('#heading-accordion-276574-1 > div:nth-child(1) > div:nth-child(2)');
+  const omvpBenefits = new OmvpBenefitsPage(page);
 
-  // Click to expand the accordion
-  await swagAccordion.click({ force: true });
+  await omvpBenefits.swagAccordion.click({ force: true });
 
-  // Verify the expanded text
-  const swagText = page.locator('#accordion-276574-1 > div:nth-child(1) > p:nth-child(1)');
-  await expect(swagText).toBeVisible();
-  await expect(swagText).toHaveText(
+  await expect(omvpBenefits.swagText).toBeVisible();
+  await expect(omvpBenefits.swagText).toHaveText(
     "The distinguished Optimizely swag as well as the OMVP trophy are some examples of the swag that OMVPs love."
   );
 });
 
 test("OMVP Benefits page Application and Nomination CTAs should redirect correctly", async ({ page }) => {
-  // Application CTAs
-  const applyTechCTA = page.locator('div.adjustheight-75:nth-child(1) > div:nth-child(1) > section:nth-child(1) > div:nth-child(2) > div:nth-child(1) > p:nth-child(3) > a:nth-child(1)');
-  await expect(applyTechCTA).toBeVisible();
-  await expect(applyTechCTA).toHaveText('Apply for a Technology OMVP now');
-  await expect(applyTechCTA).toHaveAttribute('href', 'https://forms.office.com/r/0Xim01z897');
+  const omvpBenefits = new OmvpBenefitsPage(page);
 
-  const applyStrategyCTA = page.locator('div.adjustheight-75:nth-child(1) > div:nth-child(1) > section:nth-child(1) > div:nth-child(2) > div:nth-child(1) > p:nth-child(4) > a:nth-child(1)');
-  await expect(applyStrategyCTA).toBeVisible();
-  await expect(applyStrategyCTA).toHaveText('Apply for a Strategy OMVP now');
-  await expect(applyStrategyCTA).toHaveAttribute('href', 'https://forms.office.com/r/ss0S8q7n34');
+  await expect(omvpBenefits.applyTechCTA).toBeVisible();
+  await expect(omvpBenefits.applyTechCTA).toHaveText("Apply for a Technology OMVP now");
+  await expect(omvpBenefits.applyTechCTA).toHaveAttribute("href", "https://forms.office.com/r/0Xim01z897");
 
-  // Nomination CTA
-  const nominateCTA = page.locator('div.adjustheight-75:nth-child(2) > div:nth-child(1) > section:nth-child(1) > div:nth-child(2) > div:nth-child(1) > p:nth-child(3) > a');
-  await expect(nominateCTA).toBeVisible();
-  await expect(nominateCTA).toHaveText('Nominate now');
-  await expect(nominateCTA).toHaveAttribute('href', 'https://forms.office.com/r/7crUwMLJPh');
+  await expect(omvpBenefits.applyStrategyCTA).toBeVisible();
+  await expect(omvpBenefits.applyStrategyCTA).toHaveText("Apply for a Strategy OMVP now");
+  await expect(omvpBenefits.applyStrategyCTA).toHaveAttribute("href", "https://forms.office.com/r/ss0S8q7n34");
+
+  await expect(omvpBenefits.nominateCTA).toBeVisible();
+  await expect(omvpBenefits.nominateCTA).toHaveText("Nominate now");
+  await expect(omvpBenefits.nominateCTA).toHaveAttribute("href", "https://forms.office.com/r/7crUwMLJPh");
 });
