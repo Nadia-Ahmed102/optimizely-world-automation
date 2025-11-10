@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await omvpEvents.goto();
 });
 
-test("OMVP page should have expected title", async ({ page }) => {
+test("OMVP Events page should have expected title", async ({ page }) => {
   await expect(page).toHaveTitle("OMVP Events | Optimizely Developer Community");
 });
 
