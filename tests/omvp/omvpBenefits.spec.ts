@@ -26,7 +26,7 @@ test("OMVP Benefits page breadcrumbs should be correct", async ({ page }) => {
   await expect(omvpBenefits.omvpBreadcrumb).toHaveAttribute("href", "/community/omvp/");
 });
 
-test("OMVP Benefits page header should contain expected texts", async ({ page }) => {
+test("OMVP Benefits page hero text should contain expected texts", async ({ page }) => {
   const omvpBenefits = new OmvpBenefitsPage(page);
 
   await expect(omvpBenefits.header).toBeVisible();

@@ -10,7 +10,7 @@ test("OMVP Events page should have expected title", async ({ page }) => {
   await expect(page).toHaveTitle("OMVP Events | Optimizely Developer Community");
 });
 
-test("OMVP Events page header and description should be correct", async ({ page }) => {
+test("OMVP Events page hero text and description text should be correct", async ({ page }) => {
   const omvpEvents = new OmvpEventsPage(page);
 
   await expect(omvpEvents.header).toBeVisible();

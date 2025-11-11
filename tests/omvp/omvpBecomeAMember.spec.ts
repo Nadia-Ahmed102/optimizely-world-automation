@@ -8,7 +8,7 @@ test.describe('OMVP Page Tests', () => {
     await expect(page).toHaveTitle(/Become a Member | Optimizely Developer Community/);
   });
 
-  test('Header Verification', async ({ page }) => {
+  test('Hero Text Verification', async ({ page }) => {
     const omvpPage = new OmvpPage(page);
     await omvpPage.navigate();
     await omvpPage.verifyHeader('Become an OMVP');

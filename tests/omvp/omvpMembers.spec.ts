@@ -13,7 +13,7 @@ test.describe("OMVP Members Page Tests", () => {
     await omvpMembers.verifyPageTitle();
   });
 
-  test("OMVP Members page header should be correct", async ({ page }) => {
+  test("OMVP Members page hero text should be correct", async ({ page }) => {
     const omvpMembers = new OmvpMembersPage(page);
     await omvpMembers.verifyHeader();
   });
