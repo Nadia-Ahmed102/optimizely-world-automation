@@ -70,4 +70,8 @@ export class omvpPage extends basePage {
     this.exploreOMVPMembers = page.locator("div.col:nth-child(4) > div:nth-child(1) > section:nth-child(1) > a:nth-child(1)");
     this.exploreApplicationNomination = page.locator("div.col:nth-child(5) > div:nth-child(1) > section:nth-child(1) > a:nth-child(1)");
   }
+
+  async navigate() {
+    await this.page.goto("https://world.optimizely.com/community/omvp/");
+  }
 }

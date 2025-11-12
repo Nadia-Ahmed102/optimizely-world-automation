@@ -4,7 +4,7 @@ import { OmvpBadgesPage } from "../../Pages/omvpBadges";
 
 test.beforeEach(async ({ page }) => {
   const omvpBadges = new OmvpBadgesPage(page);
-  await page.goto("https://world.optimizely.com/community/omvp/badges/");
+  await omvpBadges.goto();
 });
 
 test("OMVP Badges page should have expected title", async ({ page }) => {
